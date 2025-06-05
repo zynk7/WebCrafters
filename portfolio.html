@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - SiteYard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-menu a {
+            color: #ccc;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #fff;
+        }
+
+        .nav-cta {
+            background: #fff;
+            color: #000;
+            padding: 12px 24px;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border-radius: 0;
+        }
+
+        .nav-cta:hover {
+            background: #f0f0f0;
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: #000;
+            padding: 120px 0 60px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease 0.3s forwards;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: #ccc;
+            line-height: 1.5;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease 0.6s forwards;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 3rem;
+        }
+
+        /* Portfolio Section */
+        .portfolio-section {
+            padding: 80px 0 120px;
+            background: #fff;
+            color: #000;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 3rem;
+            padding-right: 3rem;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease 0.9s forwards;
+        }
+
+        .filter-tab {
+            background: transparent;
+            border: 1px solid #ddd;
+            color: #666;
+            padding: 12px 24px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 0;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .filter-tab:hover,
+        .filter-tab.active {
+            background: #000;
+            color: #fff;
+            border-color: #000;
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .portfolio-item {
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+            border-radius: 0;
+        }
+
+        .portfolio-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            border-color: #ddd;
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 300px;
+            background: #f8f8f8;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .portfolio-item:hover .portfolio-image img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .view-project {
+            background: #fff;
+            color: #000;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border-radius: 0;
+        }
+
+        .view-project:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        .portfolio-content {
+            padding: 2rem;
+        }
+
+        .portfolio-content h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #000;
+            letter-spacing: -0.5px;
+        }
+
+        .portfolio-content .project-type {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .portfolio-content p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .project-tag {
+            background: #f5f5f5;
+            color: #666;
+            padding: 4px 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border-radius: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: #000;
+            color: #fff;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            letter-spacing: -1px;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 3rem;
+        }
+
+        .cta-button {
+            background: #fff;
+            color: #000;
+            padding: 20px 40px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border-radius: 0;
+            margin-right: 1rem;
+        }
+
+        .cta-button:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-button.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: #000;
+            color: #fff;
+            padding: 80px 0 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            max-width: 400px;
+        }
+
+        .footer-brand .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .footer-brand p {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 0;
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .footer-column h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .footer-contact {
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer-contact strong {
+            color: #fff;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-legal a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-legal a:hover {
+            color: #ccc;
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 1024px) {
+            .nav-container,
+            .section-container,
+            .footer-container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                gap: 2rem;
+            }
+
+            .filter-tabs {
+                gap: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .filter-tab {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .nav-container,
+            .section-container,
+            .footer-container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+
+            .footer-legal {
+                justify-content: center;
+            }
+
+            .cta-button {
+                padding: 16px 32px;
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+                display: block;
+                margin-right: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content {
+                padding: 0 1.5rem;
+            }
+
+            .nav-container,
+            .section-container,
+            .footer-container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .nav-container {
+                height: 70px;
+            }
+
+            .nav-menu {
+                gap: 1.5rem;
+            }
+
+            .nav-menu a {
+                font-size: 0.9rem;
+            }
+
+            .portfolio-section {
+                padding: 60px 0 80px;
+            }
+
+            .cta-section {
+                padding: 60px 0;
+            }
+
+            .footer {
+                padding: 60px 0 30px;
+            }
+
+            .footer-content {
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">SiteYard</a>
+            <ul class="nav-menu">
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="portfolio.html" class="active">Portfolio</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="quote.html" class="nav-cta">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Our Portfolio</h1>
+            <p>Explore our recent projects and see how we've helped businesses create powerful digital experiences that drive growth and engagement.</p>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio-section">
+        <div class="section-container">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">All Projects</button>
+                <button class="filter-tab" data-filter="web-design">Web Design</button>
+                <button class="filter-tab" data-filter="ecommerce">E-commerce</button>
+                <button class="filter-tab" data-filter="landing">Landing Pages</button>
+                <button class="filter-tab" data-filter="redesign">Redesigns</button>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-item fade-in visible" data-category="web-design">
+                    <div class="portfolio-image">
+                        <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: 700;">Luxe Interiors</div>
+                        <div class="portfolio-overlay">
+                            <a href="#" class="view-project">View Project</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Luxe Interiors</h3>
+                        <div class="project-type">Interior Design Studio</div>
+                        <p>A sophisticated website for a high-end interior design studio featuring elegant portfolio galleries and seamless client inquiry flows.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Custom Design</span>
+                            <span class="project-tag">Portfolio</span>
+                            <span class="project-tag">CMS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item fade-in visible" data-category="ecommerce">
+                    <div class="portfolio-image">
+                        <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: 700;">Bloom & Co</div>
+                        <div class="portfolio-overlay">
+                            <a href="#" class="view-project">View Project</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Bloom & Co Botanicals</h3>
+                        <div class="project-type">E-commerce Store</div>
+                        <p>Complete online store for a premium plant retailer with inventory management, subscription services, and care guides.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">E-commerce</span>
+                            <span class="project-tag">Subscriptions</span>
+                            <span class="project-tag">Mobile App</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item fade-in visible" data-category="landing">
+                    <div class="portfolio-image">
+                        <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: 700;">TechFlow</div>
+                        <div class="portfolio-overlay">
+                            <a href="#" class="view-project">View Project</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>TechFlow SaaS</h3>
+                        <div class="project-type">SaaS Landing Page</div>
+                        <p>High-converting landing page for a productivity software with A/B tested elements and seamless trial signup flow.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Landing Page</span>
+                            <span class="project-tag">Conversion</span>
+                            <span class="project-tag">A/B Testing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item fade-in visible" data-category="redesign">
+                    <div class="portfolio-image">
+                        <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: 700;">Mountain Cafe</div>
+                        <div class="portfolio-overlay">
+                            <a href="#" class="view-project">View Project</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Mountain Peak Cafe</h3>
+                        <div class="project-type">Restaurant Redesign</div>
+                        <p>Complete redesign of a local cafe's website with online ordering, menu management, and reservation system integration.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Redesign</span>
+                            <span class="project-tag">Online Ordering</span>
+                            <span class="project-tag">Local SEO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item fade-in visible" data-category="web-design">
+                    <div class="portfolio-image">
+                        <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); display: flex; align-items: center; justify-content: center; color: #333; font-size: 2rem; font-weight: 700;">Wellness Hub</div>
+                        <div class="portfolio-overlay">
+                            <a href="#" class="view-project">View Project</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Wellness Hub</h3>
+                        <div class="project-type">Health & Wellness</div>
+                        <p>Calming, accessible website for a wellness center with appointment booking, class schedules, and practitioner profiles.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Booking System</span>
+                            <span class="project-tag">Accessibility</span>
+                            <span class="project-tag">Content Hub</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item fade-in visible" data-category="ecommerce">
+                    <div class="portfolio-image">
+                        <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); display: flex; align-items: center; justify-content: center; color: #333; font-size: 2rem; font-weight: 700;">Artisan Goods</div>
+                        <div class="portfolio-overlay">
+                            <a href="#" class="view-project">View Project</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Artisan Goods Co</h3>
+                        <div class="project-type">Handmade Marketplace</div>
+                        <p>Multi-vendor marketplace for local artisans with vendor dashboards, commission tracking, and integrated payments.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Marketplace</span>
+                            <span class="project-tag">Multi-vendor</span>
+                            <span class="project-tag">Analytics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="section-container">
+            <h2>Ready to Start Your Project?</h2>
+            <p>Let's create something amazing together. Get in touch to discuss your vision and see how we can bring it to life.</p>
+            <a href="quote.html" class="cta-button">Get Your Free Quote</a>
+            <a href="#contact" class="cta-button secondary">Contact Us</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">SiteYard</a>
+                    <p>Creating high-performance websites that help businesses grow. From custom designs to full e-commerce solutions, we build digital experiences that convert visitors into customers.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="m16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#services">Website Design</a></li>
+                        <li><a href="index.html#services">Website Redesign</a></li>
+                        <li><a href="index.html#services">Landing Pages</a></li>
+                        <li><a href="index.html#services">E-commerce</a></li>
+                        <li><a href="index.html#services">SEO Services</a></li>
+                        <li><a href="index.html#services">Maintenance</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Reviews</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Get In Touch</h4>
+                    <div class="footer-contact">
+                        <strong>Email:</strong>
+                        hello@siteyard.com
+                        <br><br>
+                        <strong>Phone:</strong>
+                        (555) 123-4567
+                        <br><br>
+                        <strong>Hours:</strong>
+                        Mon-Fri 9AM-6PM CST
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 SiteYard. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(0, 0, 0, 0.98)';
+                navbar.style.borderBottom = '1px solid rgba(255, 255, 255, 0.15)';
+            } else {
+                navbar.style.background = 'rgba(0, 0, 0, 0.95)';
+                navbar.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Portfolio filtering
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const filter = tab.getAttribute('data-filter');
+                
+                // Update active tab
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Filter portfolio items
+                portfolioItems.forEach(item => {
+                    const category = item.getAttribute('data-category');
+                    
+                    if (filter === 'all' || category === filter) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.classList.add('visible');
+                        }, 100);
+                    } else {
+                        item.classList.remove('visible');
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe animated elements
+        document.querySelectorAll('.fade-in, .portfolio-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Stagger animation for portfolio items
+        const portfolioCards = document.querySelectorAll('.portfolio-item');
+        portfolioCards.forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+    </script>
+</body>
+</html>
