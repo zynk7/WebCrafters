@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiteYard - Websites That Work Hard for Your Business</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-menu a {
+            color: #ccc;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: #fff;
+        }
+
+        .nav-cta {
+            background: #fff;
+            color: #000;
+            padding: 12px 24px;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border-radius: 0;
+        }
+
+        .nav-cta:hover {
+            background: #f0f0f0;
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: #000;
+            padding: 120px 0 80px;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            color: #fff;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease 0.3s forwards;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            color: #ccc;
+            line-height: 1.5;
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease 0.6s forwards;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 4rem;
+        }
+
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease 0.9s forwards;
+        }
+
+        .feature-badge {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 16px 24px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #fff;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            border-radius: 0;
+            cursor: default;
+        }
+
+        .feature-badge:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .hero-cta {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease 1.2s forwards;
+        }
+
+        .cta-button {
+            background: #fff;
+            color: #000;
+            padding: 20px 40px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border-radius: 0;
+            margin-right: 1rem;
+        }
+
+        .cta-button:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-button.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Services Section */
+        .section {
+            padding: 120px 0;
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+            background: #fff;
+            color: #000;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 3rem;
+            padding-right: 3rem;
+        }
+
+        .section h2 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 6rem;
+            text-align: center;
+            letter-spacing: -1px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #000;
+        }
+
+        .section h2.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 3rem;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: #fff;
+            padding: 4rem 3rem;
+            text-align: left;
+            transition: all 0.4s ease;
+            border: 1px solid #e8e8e8;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+            width: 100%;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-radius: 0;
+        }
+
+        .service-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            border-color: #ddd;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: #000;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.5rem;
+            transition: all 0.4s ease;
+            border-radius: 0;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #000;
+            letter-spacing: -0.5px;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .service-price {
+            font-weight: 700;
+            color: #000;
+            font-size: 1.2rem;
+            padding: 16px 0;
+            display: inline-block;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+
+        .service-features li {
+            padding: 8px 0;
+            color: #666;
+            font-size: 0.9rem;
+            position: relative;
+            padding-left: 1.5rem;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .service-features li:last-child {
+            border-bottom: none;
+        }
+
+        .service-cta {
+            margin-top: auto;
+        }
+
+        .service-button {
+            background: #000;
+            color: #fff;
+            padding: 16px 32px;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .service-button:hover {
+            background: #333;
+            transform: translateY(-1px);
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: #000;
+            color: #fff;
+            padding: 80px 0 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            max-width: 400px;
+        }
+
+        .footer-brand .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .footer-brand p {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 0;
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .footer-column h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .footer-contact {
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer-contact strong {
+            color: #fff;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-legal a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-legal a:hover {
+            color: #ccc;
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+                gap: 2rem;
+            }
+
+            .service-card {
+                min-height: 450px;
+                padding: 3rem 2rem;
+            }
+
+            .nav-container,
+            .section-container,
+            .footer-container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                gap: 2rem;
+            }
+
+            .hero-features {
+                gap: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .feature-badge {
+                padding: 12px 20px;
+                font-size: 0.85rem;
+            }
+
+            .cta-button {
+                padding: 16px 32px;
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(6, 1fr);
+                gap: 2rem;
+            }
+
+            .service-card {
+                min-height: 400px;
+                padding: 2.5rem 2rem;
+            }
+
+            .service-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .service-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .nav-container,
+            .section-container,
+            .footer-container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+
+            .footer-legal {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content {
+                padding: 0 1.5rem;
+            }
+
+            .nav-container,
+            .section-container,
+            .footer-container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .nav-container {
+                height: 70px;
+            }
+
+            .nav-menu {
+                gap: 1.5rem;
+            }
+
+            .nav-menu a {
+                font-size: 0.9rem;
+            }
+
+            .footer {
+                padding: 60px 0 30px;
+            }
+
+            .footer-content {
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">SiteYard</a>
+            <ul class="nav-menu">
+                <li><a href="#services">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="quote.html" class="nav-cta">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Websites That Work Hard for Your Business</h1>
+            <p>We design beautiful, performance-driven websites that help you stand out and scale up — whether you're starting from scratch or need a serious upgrade.</p>
+            
+            <div class="hero-features">
+                <div class="feature-badge">Fast Turnaround</div>
+                <div class="feature-badge">Mobile-Responsive</div>
+                <div class="feature-badge">SEO-Optimized</div>
+                <div class="feature-badge">Local Support</div>
+            </div>
+            
+            <div class="hero-cta">
+                <a href="#services" class="cta-button secondary">View Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section services-section">
+        <div class="section-container">
+            <h2 class="fade-in visible">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card slide-in-left visible">
+                    <div class="service-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3 3h18v2H3V3zm0 4h18v2H3V7zm0 4h18v2H3v-2zm0 4h12v2H3v-2zm0 4h18v2H3v-2z"/>
+                            <circle cx="17" cy="15" r="2"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Full Website Design</h3>
+                        <p>Custom design tailored to your brand and optimized for desktop and mobile. Built from scratch to match your unique business needs.</p>
+                        <ul class="service-features">
+                            <li>Custom design & branding</li>
+                            <li>Mobile-responsive layout</li>
+                            <li>Content management system</li>
+                            <li>SEO optimization</li>
+                            <li>Performance optimization</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="service-cta">
+                            <a href="quote.html" class="service-button">Get your free quote now!</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card fade-in visible">
+                    <div class="service-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Website Redesign</h3>
+                        <p>Transform your old website into a modern, effective platform that converts visitors into customers with improved performance.</p>
+                        <ul class="service-features">
+                            <li>Modern design update</li>
+                            <li>Improved user experience</li>
+                            <li>Speed optimization</li>
+                            <li>Mobile optimization</li>
+                            <li>Content migration</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="service-cta">
+                            <a href="quote.html" class="service-button">Get your free quote now!</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card slide-in-right visible">
+                    <div class="service-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Landing Pages</h3>
+                        <p>Conversion-focused single pages perfect for ads, campaigns, or specific products. Designed to turn visitors into leads.</p>
+                        <ul class="service-features">
+                            <li>High-conversion design</li>
+                            <li>A/B testing ready</li>
+                            <li>Lead capture forms</li>
+                            <li>Analytics integration</li>
+                            <li>Fast loading speed</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="service-cta">
+                            <a href="quote.html" class="service-button">Get your free quote now!</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card slide-in-left visible">
+                    <div class="service-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                            <path d="M10 17l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Site Maintenance</h3>
+                        <p>Monthly updates, speed improvements, security monitoring, and technical support to keep your website running smoothly.</p>
+                        <ul class="service-features">
+                            <li>Regular security updates</li>
+                            <li>Performance monitoring</li>
+                            <li>Content updates</li>
+                            <li>Backup management</li>
+                            <li>Technical support</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="service-cta">
+                            <a href="quote.html" class="service-button">Get your free quote now!</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card fade-in visible">
+                    <div class="service-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            <path d="M12 10h-2v3H9v-3H7V9h2V7h1v2h2v1z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>SEO Starter Pack</h3>
+                        <p>Google Business setup, local SEO optimization, and social media integration to help customers find you online.</p>
+                        <ul class="service-features">
+                            <li>Google Business Profile</li>
+                            <li>Local SEO optimization</li>
+                            <li>Social media setup</li>
+                            <li>Analytics configuration</li>
+                            <li>Keyword research</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="service-cta">
+                            <a href="quote.html" class="service-button">Get your free quote now!</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card slide-in-right visible">
+                    <div class="service-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1zm16 16c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>E-commerce Solutions</h3>
+                        <p>Complete online store setup with inventory management, payment processing, and customer account features for your business.</p>
+                        <ul class="service-features">
+                            <li>Custom online store</li>
+                            <li>Inventory management</li>
+                            <li>Payment integration</li>
+                            <li>Customer accounts</li>
+                            <li>Order management</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="service-cta">
+                            <a href="quote.html" class="service-button">Get your free quote now!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="logo">SiteYard</a>
+                    <p>Creating high-performance websites that help businesses grow. From custom designs to full e-commerce solutions, we build digital experiences that convert visitors into customers.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="m16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services">Website Design</a></li>
+                        <li><a href="#services">Website Redesign</a></li>
+                        <li><a href="#services">Landing Pages</a></li>
+                        <li><a href="#services">E-commerce</a></li>
+                        <li><a href="#services">SEO Services</a></li>
+                        <li><a href="#services">Maintenance</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Reviews</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Get In Touch</h4>
+                    <div class="footer-contact">
+                        <strong>Email:</strong>
+                        hello@siteyard.com
+                        <br><br>
+                        <strong>Phone:</strong>
+                        (555) 123-4567
+                        <br><br>
+                        <strong>Hours:</strong>
+                        Mon-Fri 9AM-6PM CST
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 SiteYard. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(0, 0, 0, 0.98)';
+                navbar.style.borderBottom = '1px solid rgba(255, 255, 255, 0.15)';
+            } else {
+                navbar.style.background = 'rgba(0, 0, 0, 0.95)';
+                navbar.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe animated elements
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .service-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Stagger animation for service cards
+        const serviceCards = document.querySelectorAll('.service-card');
+        serviceCards.forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+
+        // Section heading observer
+        const headingObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.section h2').forEach(heading => {
+            headingObserver.observe(heading);
+        });
+
+
+    </script>
+</body>
+</html>
